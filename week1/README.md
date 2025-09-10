@@ -28,13 +28,13 @@ When I read these quotes, I feel the real issue is control. Whoever controls new
 
 ### 3. Patrick Lin, _Why We’re Not Using AI in This Course, Despite Its Obvious Benefits_
 
-> “I hope you choose to exercise your privilege of being human with a direct connection to reality, not through an AI filter or middleman by letting it do your thinking
+> “I hope you choose to exercise your privilege of being human with a direct connection to reality, not through an AI filter or middleman by letting it do your thinking.”
 
-What is the point of a 4-year **university** or a general education?
-What is the point of **work?**
-What is the value of **creativity?**
-What is the value of **free time?**
-Why is **cheating** even bad in the first place?”
+> “What is the point of a 4-year **university** or a general education?”
+> “What is the point of **work?**”
+> “What is the value of **creativity?**”
+> “What is the value of **free time?**”
+> “Why is **cheating** even bad in the first place?””
 
 I think we can give a simple answer to the essay’s final question. Whether in work or in study, people are always searching for meaning. Most often, that sense of meaning comes from creating something—whether it’s producing work, learning, or even just cooking a beautiful meal for your family. We are always trying to balance work and free time: when there is too much work, people long for freedom, but when there is too much freedom, it often becomes hard to find joy in life. Then people go back to work, finding recognition of their own existence through what they do.
 
