@@ -4,7 +4,7 @@
 
 ## Hello Kitty with P5.js!
 
-- Using `rect()`, `ellipse()`, `bezierVertex()`, and `circle()`.
+- Using `rect()`, `ellipse()`,`beginShape()`,`endShape()`, `bezierVertex()`, and `circle()`.
 
 - Using variables and iterating them to draw background pink circles.
 
