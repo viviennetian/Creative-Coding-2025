@@ -5,7 +5,7 @@ It draws a grid of Hello Kitty figures that rotate and scale based on mouse posi
 Each time I click the canvas, the bowknot color changes randomly.
 
 This project builds on my **Week 2 work**, where I originally drew a single Hello Kitty.  
-In Week 3, I reused that shape using a custom function `drawKT()` and placed it inside a dynamic grid.
+In Week 4, I reused that shape using a custom function `drawKT()` and placed it inside a dynamic grid.
 
 ---
 
@@ -15,7 +15,7 @@ I use **nested `for` loops** to repeat the Kitty drawing:
 
 If I only used one loop, I could only draw in a single line.  
 To draw multiple rows without copy-pasting code 10 times,  
-I used a **nested loop**: a loop *inside* another loop.
+I used a **nested loop**: a loop _inside_ another loop.
 
 - The **outer loop** goes down the screen, one row at a time
 - The **inner loop** goes across the screen, drawing figures in that row
@@ -27,7 +27,6 @@ I used a **nested loop**: a loop *inside* another loop.
   - `drawKT()` is called to draw the Hello Kitty
 
 This makes the grid fully automatic — I can change the spacing or canvas size, and the whole layout adjusts without rewriting any drawing code.
----
 
 ## Mouse Interaction
 
