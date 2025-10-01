@@ -13,18 +13,20 @@ In Week 3, I reused that shape using a custom function `drawKT()` and placed it 
 
 I use **nested `for` loops** to repeat the Kitty drawing:
 
-- The **outer loop** creates vertical rows (`y += 100`)
-- The **inner loop** creates horizontal columns (`x += 100`)
+If I only used one loop, I could only draw in a single line.  
+To draw multiple rows without copy-pasting code 10 times,  
+I used a **nested loop**: a loop *inside* another loop.
+
+- The **outer loop** goes down the screen, one row at a time
+- The **inner loop** goes across the screen, drawing figures in that row
+
 - Inside each grid cell:
   - `translate(x, y)` moves the origin to that location
   - `rotate()` makes each Kitty spin based on the mouse’s X position
   - `scale()` changes the Kitty size based on mouse X+Y
   - `drawKT()` is called to draw the Hello Kitty
 
-Why loops?  
-Instead of writing 100+ copies of the same drawing, loops allow me to **automate repetition**.  
-This helped me think about patterns and screen layout more efficiently.
-
+This makes the grid fully automatic — I can change the spacing or canvas size, and the whole layout adjusts without rewriting any drawing code.
 ---
 
 ## Mouse Interaction

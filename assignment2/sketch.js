@@ -23,6 +23,15 @@ function draw() {
   // 2) `y < height` checks if y is still within the canvas
   // 3) `y += 100` increases y by 100 each time, to move to the next row
   // This way, the loop draws one row every 100 pixels vertically.
+  //
+  // Why a nested loop instead of repeating one loop 10 times?
+  // In class we used a single loop to draw items in one direction (like a row).
+  // But I wanted to draw a grid — multiple rows and columns.
+  // So I used a "loop inside a loop":
+  // - The outer loop creates each row (moves vertically down)
+  // - The inner loop draws figures across that row (moves horizontally)
+  // This way, I didn’t need to manually repeat a row loop 10 times.
+  // Nested loops make layout more efficient and easier to change later.
   for (let y = 0; y < height; y += 100) {
     // ===== push(): save the current drawing state =====
     // push() saves the current transformation settings (like translate, rotate, scale).
