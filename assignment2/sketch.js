@@ -59,8 +59,15 @@ function draw() {
       // map(mouseX, 0, width, 0, 420) turns the mouseX value into a number between 0 and 420.
       // angle is used for rotating each figure differently.
       let angle;
+      // random(min, max) gives a random decimal between min and max.
+      // In this case, we use y * 0.02 to increase the randomness based on vertical position.
+      // So the further down the shape is, the more random its rotation becomes.
+      let randomRotation = random(-y * 0.01, y * 0.01);
       angle = map(mouseX, 0, width, 0, 420); // Map mouseX from [0, width] to [0, 420]
-      rotate(radians(225 + angle + x * 0.1)); //Rotate the shape by a certain angle; x * 0.1 adds variation per column; 225 is base offset that I adjusted several times to visually looks great.
+      // Combine base rotation, x variation, and y-based randomness
+      //Rotate the shape by a certain angle; x * 0.1 adds variation per column; 225 is base offset that I adjusted several times to visually looks great.
+      // Combine base rotation, x variation, and y-based randomness
+      rotate(radians(225 + angle + x * 0.1 + randomRotation));
 
       // ===== Scale logic based on mouseX + mouseY =====
       // Here I combine mouseX and mouseY to make the scale dynamic.
