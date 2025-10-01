@@ -44,7 +44,7 @@ function setup() {
 
   // ====== Hello Kitty! ======
 
-  //I drew the Kitty's face in Illustrator and let GPT do the boring part, converting the SVG paths into the numbers inside bezierVertex.
+  //I drew the Kitty's face in Illustrator, converting the SVG paths into the numbers inside bezierVertex.
 
   // ===== face shape =====
   // The face is drawn using beginShape() and multiple bezierVertex() calls.
