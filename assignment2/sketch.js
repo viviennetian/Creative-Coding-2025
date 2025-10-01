@@ -6,71 +6,40 @@ function setup() {
 
   // initialize bowknot color
   knotColor = color("#ff0000");
-  //iteration operators:
-  //i ++
-  //i += 10
-  //i --
-  //i -= 5
 }
-// translate(width / 2, height / 2);
-// //everything drawn between push and pop will be centered, with 0,0 in the center of the canvas
+
+// ===== Main drawing loop: generates a grid of Hello Kitty drawings =====
+// Each drawing is rotated and scaled dynamically based on the mouse position.
+// The bowknot color changes when the mouse is clicked.
 
 function draw() {
   background("#71ffeeff");
 
-  //创建一个每隔 100 像素的网格行，从 y = 0 开始，一直到画布底部上方 50 像素。
+  // ===== outer loop: rows spaced vertically every 100 pixels =====
   for (let y = 0; y < height; y += 100) {
     push();
-    //将绘图原点垂直移动到该行的起始位置。
-    translate(0, y);
+    translate(0, y); // shift origin downward for this row
 
-    //每隔 100 像素绘制一个单元格，从左到右，直到画布右边25像素。
+    // ===== inner loop: columns spaced horizontally every 100 pixels =====
     for (let x = 0; x < width; x += 100) {
       push();
+      translate(x, 0); // move origin to cell top-left
 
-      //leftupper corner of each cell is now x,0
-      //移动原点到每个格子的左上角（相对于之前的 y 位移）。
-      translate(x, 0);
-
-      // ===== 动态旋转角度 与 缩放 =====
+      // ===== dynamic rotation and scaling per mouse position =====
       let angle;
-      //将 mouseX 从 [0, width] 映射为 [0, 400]
-      angle = map(mouseX, 0, width, 0, 420);
-      //将图形旋转一定角度，这里还加上了 x * 0.1 让每列略有变化，225 是基础偏移。
-      rotate(radians(225 + angle + x * 0.1));
+      angle = map(mouseX, 0, width, 0, 420); // Map mouseX from [0, width] to [0, 420]
+      rotate(radians(225 + angle + x * 0.1)); //Rotate the shape by a certain angle; x * 0.1 adds variation per column; 225 is base offset.
 
       //scalable based on mouseY
       let scaleFactor; //make a variable to hold scale amount
       scaleFactor = map(mouseX + mouseY, 0, height, 0.1, 2);
       scale(scaleFactor * 0.15);
 
+      // ===== draw the scaled Hello Kitty figure =====
       push();
       scale(0.8);
       drawKT();
       pop();
-      // ===== version 1.0 smile face =====
-      // stroke("white");
-      // strokeWeight(2);
-      // fill("#ff6f6fff");
-
-      // let angle;
-      // //map is a FUNCTION that scale numbers proportionately parameters:
-      // //1: input variable to scale
-      // //2: input variable minimum
-      // //3: input variable maximum
-      // //4: output variable minimum
-      // //5: output variable maximum
-      // angle = map(mouseX, 0, width, 0, 360);
-      // rotate(radians(angle));
-
-      // let scaleFactor; //make a variable to hold scale amount
-      // scaleFactor = map(mouseY, 0, height, 0.1, 3);
-      // scale(scaleFactor, 1);
-
-      // circle(0, 0, 100);
-      // circle(-15, -10, 5);
-      // circle(15, -10, 5);
-      // arc(0, 0, 60, 60, 0, PI);
 
       pop();
     }
@@ -79,34 +48,39 @@ function draw() {
 
   //https://p5js.org/reference/p5/textSize/
 
+  // ===== draw prompt text at top-left =====
   rect(35, 18, 130, 30); //text background
 
   push();
-  fill(knotColor); // 使用当前 knotColor 颜色
+  fill(knotColor); // using current knotColor
   textSize(20);
   text("Try Clicking!", 40, 40);
   pop();
 }
 
+// ===== change bowknot color on mouse click =====
+// Randomly pick a hex color from predefined palette
 function mousePressed() {
   let hexColors = [
-    "#ff0000", // 红
-    "#ff69b4", // 粉
-    "#ffa500", // 橙
-    "#00bfff", // 蓝
-    "#9370db", // 紫
-    "#00ffcc", // 薄荷绿
-    "#ffcc00", // 金黄
-    "#ff6f61", // 珊瑚红
+    "#ff0000", // red
+    "#ff69b4", // pink
+    "#ffa500", // orange
+    "#00bfff", // blue
+    "#9370db", // purple
+    "#00ffcc", // mint green
+    "#ffcc00", // gold
+    "#ff6f61", // coral red
   ];
   knotColor = color(random(hexColors));
 }
 
+// ===== drawKT(): draws a Hello Kitty figure centered at (0,0) =====
+// The shape includes face outline, bowknot, eyes, nose, and whiskers.
+// The bowknot uses the current knotColor variable.
 function drawKT() {
-  //在绘图中心点绘制kt
-  translate(-150, -120);
+  translate(-150, -120); // recenters drawing around its visual center
 
-  // ====== face ======
+  // ===== face shape =====
   strokeWeight(5); //change stroke weight to 5 pixels wide
   fill("#ffffffff"); //change fill to white
   beginShape();
@@ -124,7 +98,7 @@ function drawKT() {
 
   // ======  red bowknot ======
   strokeWeight(5); //change stroke weight to 3 pixels wide
-  fill(knotColor); // 使用当前 knotColor 颜色
+  fill(knotColor); // using current knotColor
   beginShape();
   vertex(285.62, 39.4);
   bezierVertex(276.72, 34.9, 266.92, 34.19, 258.15, 36.68);
