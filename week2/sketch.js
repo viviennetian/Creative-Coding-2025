@@ -46,84 +46,96 @@ function setup() {
 
   //I drew the Kitty's face in Illustrator and let GPT do the boring part, converting the SVG paths into the numbers inside bezierVertex.
 
-  // ====== face ======
-  strokeWeight(3); //change stroke weight to 3 pixels wide
-  fill(255); //change fill to white
+  // ===== face shape =====
+  // The face is drawn using beginShape() and multiple bezierVertex() calls.
+  // bezierVertex() creates smooth, curvy lines — good for organic shapes like the Kitty head.
+  // The strokeWeight sets the thickness of the outline.
+  strokeWeight(5); //change stroke weight to 5 pixels wide
+  fill("#ffffffff"); //change fill to white
   beginShape();
-  vertex(272.85, 90.94);
-  bezierVertex(300.13, 33.14, 272.85, 11.84, 272.85, 11.84);
-  bezierVertex(245.57, -9.47, 215.4, 25.6, 215.4, 25.6);
-  bezierVertex(186.67, 10.63, 107.27, 25.02, 107.27, 25.02);
-  bezierVertex(82.34, -1.12, 50.4, 7.6, 50.4, 7.6);
-  bezierVertex(18.46, 16.31, 36.78, 91.73, 36.78, 91.73);
-  bezierVertex(26.37, 105.0, 20.46, 134.83, 20.46, 151.0);
-  bezierVertex(20.46, 202.64, 86.22, 222.47, 160.6, 222.47);
-  bezierVertex(234.89, 222.47, 288.89, 199.36, 288.89, 147.72);
-  bezierVertex(288.89, 131.23, 283.65, 104.4, 272.85, 90.94);
+  vertex(273, 91);
+  bezierVertex(300, 33, 273, 12, 273, 12);
+  bezierVertex(246, -9, 215, 26, 215, 26);
+  bezierVertex(187, 11, 107, 25, 107, 25);
+  bezierVertex(82, -1, 50, 8, 50, 8);
+  bezierVertex(18, 16, 37, 92, 37, 92);
+  bezierVertex(26, 105, 20, 135, 20, 151);
+  bezierVertex(20, 203, 86, 222, 161, 222);
+  bezierVertex(235, 222, 289, 199, 289, 148);
+  bezierVertex(289, 131, 284, 104, 273, 91);
   endShape(CLOSE);
 
   // ======  red bowknot ======
-  strokeWeight(3); //change stroke weight to 3 pixels wide
-  fill(255, 0, 0); //change fill to red
+  // The bow is drawn similarly to the face, using bezier curves.
+  // The fill color comes from knotColor, which changes on click.
+  strokeWeight(5);
+  fill(knotColor); // using current knotColor
   beginShape();
-  vertex(285.62, 39.4);
-  bezierVertex(276.72, 34.9, 266.92, 34.19, 258.15, 36.68);
-  bezierVertex(255.69, 33.66, 252.57, 31.09, 248.87, 29.22);
-  bezierVertex(245.17, 27.35, 241.26, 26.36, 237.37, 26.16);
-  bezierVertex(234.18, 17.62, 227.81, 10.15, 218.91, 5.64);
-  bezierVertex(200.49, -3.68, 178.23, 3.24, 169.2, 21.09);
-  bezierVertex(160.17, 38.94, 167.77, 60.99, 186.19, 70.32);
-  bezierVertex(195.09, 74.82, 204.89, 75.53, 213.66, 73.04);
-  bezierVertex(216.12, 76.06, 219.24, 78.63, 222.94, 80.5);
-  bezierVertex(226.64, 82.37, 230.55, 83.36, 234.44, 83.56);
-  bezierVertex(237.63, 92.1, 244.0, 99.57, 252.9, 104.08);
-  bezierVertex(271.32, 113.4, 293.58, 106.48, 302.61, 88.63);
-  bezierVertex(311.64, 70.78, 304.04, 48.73, 285.62, 39.4);
+  vertex(286, 39);
+  bezierVertex(277, 35, 267, 34, 258, 37);
+  bezierVertex(256, 34, 253, 31, 249, 29);
+  bezierVertex(245, 27, 241, 26, 237, 26);
+  bezierVertex(234, 18, 228, 10, 219, 6);
+  bezierVertex(200, -4, 178, 3, 169, 21);
+  bezierVertex(160, 39, 168, 61, 186, 70);
+  bezierVertex(195, 75, 205, 76, 214, 73);
+  bezierVertex(216, 76, 219, 79, 223, 81);
+  bezierVertex(227, 82, 231, 83, 234, 84);
+  bezierVertex(238, 92, 244, 100, 253, 104);
+  bezierVertex(271, 113, 294, 106, 303, 89);
+  bezierVertex(312, 71, 304, 49, 286, 39);
   endShape(CLOSE);
 
-  // ======  ellipse -- eyes and nose ======
-  fill(0); //change fill to black
+  // ===== Eyes (black ellipses) =====
+  // The eyes are drawn using ellipse() with specific width and height.
+  // I use no stroke to keep them solid black.
+  fill("#000000ff"); //change fill to black
   strokeWeight(0);
   ellipse(94, 142, 10.5 * 2, 15.5 * 2); // left eye
   ellipse(222, 142, 10.5 * 2, 15.5 * 2); // right eye
 
-  strokeWeight(3); //change back
-  fill(255, 255, 0); //change fill to yellow
+  // ===== Nose (yellow ellipse) =====
+  // Same as the eyes, but with different color and size.
+  strokeWeight(5); //change back
+  fill("#fff000ff"); //change fill to yellow
   ellipse(158, 162, 11.5 * 2, 7.5 * 2); // nose
 
-  // ====== beard -- rectangle ======
-  fill(50); //change fill to black
+  // ===== Whiskers (short rectangles) =====
+  // Each whisker is a thin rectangle. Some are rotated slightly.
+  // I use push() and pop() around rotated whiskers to isolate their transformations.
+  fill("#000000ff"); //change fill to black
   stroke(0);
   strokeWeight(1);
 
-  //left center
+  // Left-center whisker (no rotation)
   rect(7, 140, 40, 6);
 
-  //left upside
+  // Left-top whisker (rotated slightly)
+  // Without push/pop, the rotation would affect all shapes after this.
   push();
   translate(8, 112);
   rotate(radians(10));
   rect(0, 0, 40, 6);
   pop();
 
-  //left downside
+  // Left-bottom whisker
   push();
   translate(8, 170);
   rotate(radians(-10));
   rect(0, 0, 40, 6);
   pop();
 
-  //right center
+  // Right-center whisker
   rect(275, 140, 40, 6);
 
-  //right upside
+  // Right-top whisker
   push();
   translate(270, 120);
   rotate(radians(-10));
   rect(0, 0, 40, 6);
   pop();
 
-  //right downside
+  // Right-bottom whisker
   push();
   translate(275, 160);
   rotate(radians(10));
