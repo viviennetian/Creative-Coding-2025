@@ -19,9 +19,9 @@ function draw() {
   // ===== Outer Loop – Create rows (vertical repetition) =====
   // I use a for loop to repeat code that draws each row of Hello Kitty figures.
   // A for loop has 3 parts:
-  // 1) `let y = 0` initializes the variable y starting from 0
-  // 2) `y < height` checks if y is still within the canvas
-  // 3) `y += 100` increases y by 100 each time, to move to the next row
+  // 1) let y = 0 initializes the variable y starting from 0
+  // 2) y < height checks if y is still within the canvas
+  // 3) y += 100 increases y by 100 each time, to move to the next row
   // This way, the loop draws one row every 100 pixels vertically.
   //
   // Why a nested loop instead of repeating one loop 10 times?
@@ -56,15 +56,15 @@ function draw() {
 
       // ===== Rotation logic based on mouseX =====
       // I want the Hello Kitty figure to rotate based on the horizontal mouse position.
-      // `map(mouseX, 0, width, 0, 420)` turns the mouseX value into a number between 0 and 420.
-      // `angle` is used for rotating each figure differently.
+      // map(mouseX, 0, width, 0, 420) turns the mouseX value into a number between 0 and 420.
+      // angle is used for rotating each figure differently.
       let angle;
       angle = map(mouseX, 0, width, 0, 420); // Map mouseX from [0, width] to [0, 420]
       rotate(radians(225 + angle + x * 0.1)); //Rotate the shape by a certain angle; x * 0.1 adds variation per column; 225 is base offset that I adjusted several times to visually looks great.
 
       // ===== Scale logic based on mouseX + mouseY =====
-      // Here I combine `mouseX` and `mouseY` to make the scale dynamic.
-      // `map()` converts the mouse range into a scale between 0.1 and 2.
+      // Here I combine mouseX and mouseY to make the scale dynamic.
+      // map() converts the mouse range into a scale between 0.1 and 2.
       // I multiply by 0.15 to make sure the final scale is subtle and doesn't explode the figure.
       let scaleFactor;
       scaleFactor = map(mouseX + mouseY, 0, height, 0.1, 2);
@@ -75,7 +75,7 @@ function draw() {
       // It handles the actual drawing of the Kitty face, bow, and whiskers.
       // Using a function keeps the code organized and avoids repeating code multiple times.
       push(); // I want to isolate the scale(0.8) so it doesn't affect future code
-      // scale(0.8); Slightly shrink the Kitty to better visual fit.
+      // scale(0.8) Slightly shrink the Kitty to better visual fit.
       // I apply scale(0.8) to make the Hello Kitty smaller inside each cell.
       // I chose to scale here instead of redrawing a smaller figure because it's reusable and more flexible.
       scale(0.8);
