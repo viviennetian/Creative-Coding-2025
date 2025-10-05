@@ -24,11 +24,15 @@ I noticed that when these circles grew large enough to overlap, the shape became
 By dynamically changing their diameter with a sine curve (`sin()`), I achieved a **slow inhale/exhale rhythm**.
 With `draw()` running at ~60 fps, this gave a smooth “breathing” effect.
 
+![breath sketch](./breath sketch.png)
+
 ### accidentally found "Rotating Donut"
 
 While debugging the breathing animation, I tried replacing the **fixed base radius** with `circleX` and `circleY`—values originally meant for (x,y) position of the orbiting little ball.
 
 I wasn’t sure what would happen—just experimenting—but it created a **rotating, expanding donut** effect driven by the current second.
+
+![donut](./donut.png)
 
 You can check out animated "donut" here: https://viviennetian.github.io/Creative-Coding-2025/assignment3_a/
 (The size of the donut base on `second();` of current time)
@@ -176,6 +180,8 @@ To make the sky-color changes visible without waiting hours, I added a **timelin
 - A small triangle indicates the **current hour**.
 
 This is handled by a custom function `drawTimeline()`.
+
+---
 
 ## Key p5.js Functions Used
 
