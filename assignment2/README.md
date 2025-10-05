@@ -1,4 +1,4 @@
-# Hello Kitty Grid – p5.js Week 3 Practice
+# Hello Kitty Grid – p5.js Week 4 Practice
 
 This is a practice sketch I made while learning p5.js.  
 It draws a grid of Hello Kitty figures that rotate and scale based on mouse position.  
