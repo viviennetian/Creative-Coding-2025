@@ -24,7 +24,7 @@ I noticed that when these circles grew large enough to overlap, the shape became
 By dynamically changing their diameter with a sine curve (`sin()`), I achieved a **slow inhale/exhale rhythm**.
 With `draw()` running at ~60 fps, this gave a smooth “breathing” effect.
 
-![breath sketch](./breath sketch.png)
+![breath sketch](./breath sketch.jpeg)
 
 ### accidentally found "Rotating Donut"
 
