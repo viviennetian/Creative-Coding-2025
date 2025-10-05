@@ -30,10 +30,10 @@ While debugging the breathing animation, I tried replacing the **fixed base radi
 
 I wasn’t sure what would happen—just experimenting—but it created a **rotating, expanding donut** effect driven by the current second.
 
-Here’s the core sketch:
-
-You can check out animated "donut" here:
+You can check out animated "donut" here: https://viviennetian.github.io/Creative-Coding-2025/assignment3_a/
 (The size of the donut base on `second();` of current time)
+
+Here’s the code of the sketch:
 
 ```
 let circleD = 25;
@@ -163,7 +163,7 @@ This produces a **subtle shifting fill color** as time passes.
 
 I wanted the background to indicate **time of day**.
 I built a sky color palette (see image below).
-![timeline color palette](./timeline.jpg)
+![timeline color palette](./timeline.png)
 And I used an `if` statement in `getSkyColor(h)` to return the appropriate color.
 Then I call `background(bgColor, 30)` each frame to apply it with transparency.
 

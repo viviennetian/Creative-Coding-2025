@@ -63,7 +63,7 @@ function draw() {
 
   // Save drawing state so I can remove stroke below
   push();
-  strokeWeight(0);
+  noStroke();
 
   // ===== Draw Orbiting Circle =====
   //Orbiting position calculation using cosine and sine
