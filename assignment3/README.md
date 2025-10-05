@@ -1,6 +1,6 @@
-# Breath Clock – Abstract Time Visualization
+# Breath Clock
 
-## p5.js Week 5 Practice
+## Abstract Clock - p5.js Week 5 Assignment
 
 ---
 
