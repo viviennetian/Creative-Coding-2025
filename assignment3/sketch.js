@@ -28,7 +28,7 @@ function draw() {
   //
   drawTimeline();
 
-  // ===== Dynamic Background Color Mapping =====
+  // ===== Dynamic Color Mapping =====
   // The red value is fixed at 0, but green and blue change based on real time.
   // map() function scales time values to RGB ranges for subtle color shifts.
   let colorR = 0;
@@ -45,10 +45,14 @@ function draw() {
 
   // ===== Breathing Animation Using Sine Curve =====
   // I simulate a "breathing" effect using a sine wave function.
-  // The value of `breath` will oscillate between -width/4 and +width/4.
+  // My reference about sinusoidal motion is from the example. Instead of using variable for positionX, I used it for diameter.
+  // reference: https://openprocessing.org/sketch/2364172
+
+  //but for diameter, I need a positive value.
   // abs(x) returns the absolute (positive) value of x.
   // Since sine values can be negative, abs() ensures the circle's size is always positive.
   //reference: https://p5js.org/reference/p5/abs/
+  // The value of `breath` will oscillate between 0 and width/4.
   breath = abs(sin(radians(thetaB)) * (width / 4));
   thetaB++; // Increase the angle value by 1 degree each frame to keep the sine function changing over time.
 
@@ -68,13 +72,13 @@ function draw() {
   // ===== Draw Orbiting Circle =====
   //Orbiting position calculation using cosine and sine
   // This creates a circular movement path
-  circleX = (cos(thetaOrbit) * width) / 4;
-  circleY = (sin(thetaOrbit) * width) / 4;
+  circleX = cos(thetaOrbit) * (width / 4);
+  circleY = sin(thetaOrbit) * (width / 4);
   // One full orbit every 2 seconds (60 fps * 2 = 120 frames)
   let speed = TWO_PI / 120;
   thetaOrbit += speed;
   // Draw the orbiting circle
-  circle(circleY, circleX, circleD);
+  circle(circleX, circleY, circleD);
 
   // ===== Create a Radius That Shrinks Over Each Minute =====
   // R shrinks from width/3 to 0 as seconds progress
@@ -138,7 +142,7 @@ function drawTimeline() {
     // ===== Draw Current Hour Indicator =====
     // If this block corresponds to the current hour,
     // draw a small triangle above it as a pointer
-    if (h === currentHour) {
+    if (h == currentHour) {
       fill(120); // Triangle is gray
       triangle(
         x + blockSize / 2,

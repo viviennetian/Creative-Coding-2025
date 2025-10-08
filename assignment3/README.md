@@ -1,6 +1,6 @@
-# Breath Clock
+# Assignment 3 : Breath Clock
 
-## Abstract Clock - p5.js Week 5 Assignment
+## Abstract Clock, Week 5 Assignment
 
 ---
 
@@ -34,7 +34,9 @@ I wasn’t sure what would happen—just experimenting—but it created a **rota
 
 ![donut](./donut.png)
 
-You can check out animated "donut" here: https://viviennetian.github.io/Creative-Coding-2025/assignment3_a/
+You can check out animated "donut" here:
+![donut link](https://viviennetian.github.io/Creative-Coding-2025/assignment3_sketch/)
+
 (The size of the donut base on `second();` of current time)
 
 Here’s the code of the sketch:
@@ -193,3 +195,5 @@ This is handled by a custom function `drawTimeline()`.
 - `translate()` – to draw from the center of the canvas
 - `for` loops – to repeat drawing of circles efficiently
 - custom functions `getSkyColor()` and `drawTimeline()` – to organize code
+
+---

@@ -1,10 +1,32 @@
 //====== checkered background preparation ======
-// Custom column widths and row heights
+// ===== Custom column widths and row heights =====
+//Because I need to draw a chessboard-like background, and each block has different color, width and height.
+//https://p5js.org/reference/p5/Array/
+//Array is a list that keeps data in order. And it can store different types of data. Each data inside is called element, and I can use index to address the data.
+//So I used array to store the Width and Height numbers.
+
+//Numbers comes from:
+//I scale the image to 500*400 in illustrator
+//measured W and H each of them
+//the screenshot is in the assignment2 folder: ./assignment1/illustratorRuler.png
 let colWidths = [22, 48, 28, 20, 34, 36, 106, 24, 32, 60, 38, 28, 18]; // 13 columns
 let rowHeights = [30, 44, 38, 38, 38, 42, 90, 22, 32]; // 9 rows
 
-// Pre-calculate x positions for columns
+// ===== Pre-calculate x positions for columns =====
+//about for loop
+// for loop is a way to repeat a block of code with certain number of iteration.
+// I learned that in my previous coding experience, and also p5.js has for loop examples here: https://p5js.org/reference/p5/for/
+// for loops are helpful for repeating statements a certain number of times.
+// It iterates certain times based on i
+
+//combine for loop with array
+// for loops are also helpful for iterating through the elements of an array. For example, it's common to iterate through an array that contains information about where or what to draw.
+// In for loop page of p5 library, it has an example that combines array with for loop to find X coordinate of a circle
+//I used it here, so that I can loop through the array. By accumulate previous colWidths or rowHeights, I can calculate xPos and yPos of each rect.
+//also, the colWidths.length returns the number of elements inside this array.
+//xPos store the x Position of each rectangle
 let xPos = [];
+//accX is a tool to accumulate previous numbers
 let accX = 0;
 for (let i = 0; i < colWidths.length; i++) {
   xPos[i] = accX;
@@ -12,6 +34,7 @@ for (let i = 0; i < colWidths.length; i++) {
 }
 
 // Pre-calculate y positions for rows
+//yPos store the y Position of each rectangle
 let yPos = [];
 let accY = 0;
 for (let j = 0; j < rowHeights.length; j++) {
@@ -64,20 +87,23 @@ function setup() {
 
 function draw() {
   // ===== scale the whole picture according to window size =====
+  //I have a image base a 500*400 pixels, I need to scale it to fit windowWidth and windowHeight.
+  // Scale() function scales the current coordinate system by the specified factor.
+  //and the reference is here: https://p5js.org/examples/transformation-scale/
+  //I divided width with my image width,I divided height with my image height, to get the scale factor.
   let scaleX = width / baseW;
   let scaleY = height / baseH;
 
-  push(); //https://p5js.org/reference/p5/push/
-  //Begins a drawing group that contains its own styles and transformations.By default, styles such as fill() and transformations such as rotate() are applied to all drawing that follows. The push() and pop() functions can limit the effect of styles and transformations to a specific group of shapes, images, and text.
-
-  scale(scaleX, scaleY); //https://p5js.org/examples/transformation-scale/
-
-  push();
-
+  scale(scaleX, scaleY);
   //===== checkered background =====
-  //defined a function below. To draw checkered background.
+  //defined a custom function below. To draw checkered background.
+  // Custom functions are useful for organizing reusable code blocks.
+  // In this project, it just a one time use. So I use this to keep my draw() code clean, shorter and easy to read.
+  // Usually, A custom function helps organize code — instead of repeating drawing code many times,I can just call drawComplexBackground() every time I want to draw the same figure.
+  // The function includes color changing and draw rectangles base on the data stored in xPos[], yPos[],colWidths[], rowHeights[]
   drawComplexBackground();
 
+  //I drew the front screen elements from left to right, although have some repeating noFill(); noStroke(); changing, I feel like this is the best way to keep organized.
   // ===== left upside arc =====
   noFill(); // no fill color
   strokeWeight(9); // line thickness
@@ -92,8 +118,6 @@ function draw() {
   arc(75, 85, 60, 60, radians(40), radians(60));
   arc(75, 85, 60, 60, radians(80), radians(100));
   arc(75, 85, 60, 60, radians(120), radians(140));
-
-  pop();
 
   // ===== right arc =====
   noFill(); // no fill color
@@ -117,7 +141,6 @@ function draw() {
   triangle(129, 358, 178, 358, 154, 251);
 
   // ===== middle arc =====
-  push();
   noFill(); // no fill color
   strokeWeight(8); // line thickness
   strokeCap(SQUARE); // square line endings instead of round
@@ -137,10 +160,8 @@ function draw() {
   arc(155, 234, 107, 107, radians(120), radians(130));
   arc(155, 234, 107, 107, radians(140), radians(150));
 
-  pop();
-
   // ===== right sandglass =====
-
+  noStroke();
   fill(color2Dark);
   triangle(427, 30, 477, 30, 450, 173);
   triangle(450, 92, 425, 173, 475, 173);
@@ -200,8 +221,6 @@ function draw() {
   fill(color4Dark);
   triangle(386 + dx / 2, 233 + dy / 2, 386, 265, 425 + dx, 233 + dy); //head
   triangle(386 + dx / 2, 233 + dy / 2, 386, 205, 340 + dx, 233 + dy); //head
-
-  pop(); //https://p5js.org/reference/p5/pop/
 }
 
 function drawComplexBackground() {

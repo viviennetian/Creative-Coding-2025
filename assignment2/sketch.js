@@ -1,5 +1,5 @@
 // Global variable to store the current bowknot color.
-// I define it outside functions so it can be accessed and updated across the sketch.
+// I define it outside functions so it can be accessed in both draw and drawKT function.
 let knotColor;
 
 function setup() {
@@ -33,24 +33,17 @@ function draw() {
   // This way, I didn’t need to manually repeat a row loop 10 times.
   // Nested loops make layout more efficient and easier to change later.
   for (let y = 0; y < height; y += 100) {
-    // ===== push(): save the current drawing state =====
-    // push() saves the current transformation settings (like translate, rotate, scale).
-    // This makes sure that the translation we apply for this row does not affect the rest of the drawing.
-    push();
-
-    // ===== translate(): move origin to the start of this row =====
-    // Now all drawing in this row will happen starting from y pixels down.
-    translate(0, y);
-
     // ===== Inner Loop – Create columns (horizontal repetition) =====
     // Same idea as above, but this time we move across the screen horizontally.
     // The x variable controls the position along the width of the canvas.
     for (let x = 0; x < width; x += 100) {
-      push();
+      push(); // ===== push(): save the current drawing state =====
+      // push() saves the current transformation settings (like translate, rotate, scale).
+      // This makes sure that the translation we apply for current KT does not affect the rest of the drawing.
 
       // ===== translate();
       // Now everything we draw will be relative to this cell’s position at (x, y)
-      translate(x, 0);
+      translate(x, y);
 
       // ===== dynamic rotation and scaling per mouse position =====
 
@@ -91,7 +84,6 @@ function draw() {
 
       pop(); // End of this cell (x)
     }
-    pop(); // End of this row (y)
   }
 
   // ===== Text prompt: click to change bow color =====
@@ -130,6 +122,14 @@ function mousePressed() {
 
 // ===== drawKT(): custom function to draw one Hello Kitty =====
 // This is a svg shape I drew in Week 2 and reused here.
+// Hello Kitty SVG file is exported from a illustrator file I drew for ideation class.
+// screenshot of illustrator file: ./assignment2/kittyIllustrator.png
+// svg files: ./assignment2/SVG
+//So I need a converter here. And I use GPT as a search engine to tell me is whether we have this kind of tool on the internet. And here it is:
+//SVG to p5.js CONVERTER, made by Munus Shih.
+//https://openprocessing.org/sketch/1997741/
+//Basically, this tool takes SVG input, parses it using DOMParser() function, make it readable for javascript. And loop through all the SVG shapes. reads attributes like fill, stroke, geometry... And turn it to p5js code.(like <rect> to  rect(), <path> to a group of vertex and bezier). At last, it returns pjs code as string.
+
 // Custom functions are useful for organizing reusable code blocks.(Maybe I will use it again in future projects?)
 // In this project, it just a one time use. So I use this to keep my draw() code clean, shorter and easy to read (just personal preference).
 // Usually, A custom function helps organize code — instead of repeating drawing code many times,I can just call drawKT() every time I want to draw the same figure.

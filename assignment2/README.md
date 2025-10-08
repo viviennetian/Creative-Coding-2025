@@ -1,6 +1,8 @@
-# Hello Kitty Grid – p5.js Week 4 Practice
+# Assignment 2 : Hello Kitty Grid
 
-This is a practice sketch I made while learning p5.js.  
+## Generative Pattern, Week 4 Assignment
+
+This is a practice sketch.
 It draws a grid of Hello Kitty figures that rotate and scale based on mouse position.  
 Each time I click the canvas, the bowknot color changes randomly.
 
@@ -44,6 +46,18 @@ This makes the grid fully automatic — I can change the spacing or canvas size,
 - Every click = a new color = more surprise and fun!
 
 ## drawKT(): Reusing My Week 2 Work
+
+used my previous drawing:
+![kitty in illustrator](./kittyIllustrator.png)
+
+svg files: ./assignment2/SVG
+
+I need converted my svg to p5js code. And I use GPT as a search engine to tell me is whether we have this kind of tool on the internet.
+And here it is:
+SVG to p5.js CONVERTER, made by Munus Shih.
+![converter](https://openprocessing.org/sketch/1997741/)
+
+Basically, this tool takes SVG input, parses it using DOMParser() function, make it readable for javascript. And loop through all the SVG shapes. reads attributes like fill, stroke, geometry... And turn it to p5js code.(like <rect> to rect(), <path> to a group of vertex and bezier). At last, it returns pjs code as string.
 
 I created a custom function `drawKT()` to keep things organized.
 
