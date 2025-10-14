@@ -10,6 +10,10 @@ let circleY;
 let thetaY = 0;
 let radiusY = 100;
 
+let prevMillis = 0;
+
+let prevSecond = 0;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   circleX = width / 2;
@@ -54,6 +58,15 @@ function draw() {
     let y = sin(radians(theta)) * radiusY;
     circle(x, y, radius);
   }
+
+  //how to use millis():  https://openprocessing.org/sketch/2364172
+  if (millis() - prevMillis >= 1000) {
+    prevMillis = millis(); //new stopwatch time is current time
+  }
+
+  let millisecond = millis() - prevMillis;
+
+  circle(0, 0, millisecond);
 
   // for (let i = 0; i < 12; i++) {
   //   let theta = i * (360 / 12);

@@ -29,7 +29,7 @@ function draw() {
   drawTimeline();
 
   // ===== Dynamic Color Mapping =====
-  // The red value is fixed at 0, but green and blue change based on real time.
+  // I set red value is fixed at 0, but green and blue change based on real time.
   // map() function scales time values to RGB ranges for subtle color shifts.
   let colorR = 0;
   let colorG = map(minute(), 0, 60, 150, 210); // Green slowly changes over 1 hour
@@ -52,7 +52,7 @@ function draw() {
   // abs(x) returns the absolute (positive) value of x.
   // Since sine values can be negative, abs() ensures the circle's size is always positive.
   //reference: https://p5js.org/reference/p5/abs/
-  // The value of `breath` will oscillate between 0 and width/4.
+  // The value of breath will oscillate between 0 and width/4.
   breath = abs(sin(radians(thetaB)) * (width / 4));
   thetaB++; // Increase the angle value by 1 degree each frame to keep the sine function changing over time.
 
@@ -140,7 +140,7 @@ function drawTimeline() {
     rect(x, timelineY, blockSize, blockSize);
 
     // ===== Draw Current Hour Indicator =====
-    // If this block corresponds to the current hour,
+    // this block corresponds to the current hour,
     // draw a small triangle above it as a pointer
     if (h == currentHour) {
       fill(120); // Triangle is gray
@@ -157,9 +157,9 @@ function drawTimeline() {
 }
 
 // ===== Generate Sky-Like Color Based on Hour =====
-// This function returns a different RGB color depending on the hour of the day (0–23).
+// This function returns a different RGB color depending on the hour of the day (0-23).
 // It simulates natural sky color changes from night to dawn, noon, sunset, and back to night.
-// Colors are manually sampled from a custom-designed 24-hour gradient palette.
+// Colors are manually sampled from a custom-designed 24 hour gradient palette.
 function getSkyColor(h) {
   if (h >= 1 && h < 5) {
     return color(49, 50, 111); // Deep night: dark blue-purple

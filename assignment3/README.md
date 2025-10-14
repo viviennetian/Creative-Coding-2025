@@ -11,7 +11,7 @@ Using a breathing animation at the center and a color-changing background that r
 
 The 12 pulsing circles expand and contract together like a breath. Each second, minute, and hour is mapped onto different visual elements: motion, color, and background. A 24-hour timeline at the bottom left shows the sky colors for the entire day, with a triangle pointing to the current hour.
 
-This project is not meant to be “read” like a traditional clock, but to give a sense of time gently passing—quietly changing, but always in motion.
+This project is not meant to be “read” like a traditional clock, but to give a sense of time gently passing—quietly changing.
 
 ---
 
