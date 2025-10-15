@@ -64,9 +64,9 @@ function draw() {
     prevMillis = millis(); //new stopwatch time is current time
   }
 
-  let millisecond = millis() - prevMillis;
+  // let millisecond = millis() - prevMillis;
 
-  circle(0, 0, millisecond);
+  // circle(0, 0, millisecond);
 
   // for (let i = 0; i < 12; i++) {
   //   let theta = i * (360 / 12);

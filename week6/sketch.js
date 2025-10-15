@@ -20,8 +20,8 @@ let drunkAmount = 50;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(100, 80, 0);
-  x = width / 2;
-  y = height / 2;
+  // x = width / 2;
+  // y = height / 2;
   colorMode(HSB);
 
   // // version 1: manually
