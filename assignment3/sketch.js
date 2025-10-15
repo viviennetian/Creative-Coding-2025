@@ -157,6 +157,7 @@ function drawTimeline() {
 }
 
 // ===== Generate Sky-Like Color Based on Hour =====
+//I need a function that can tell me the color value corresponding to a given time input.
 // This function returns a different RGB color depending on the hour of the day (0-23).
 // It simulates natural sky color changes from night to dawn, noon, sunset, and back to night.
 // Colors are manually sampled from a custom-designed 24 hour gradient palette.
