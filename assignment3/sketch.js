@@ -18,7 +18,7 @@ function draw() {
 
   // ===== Background Color Based on Current Hour =====
   // Get the current hour using p5's hour() function (0–23).
-  // Use our custom getSkyColor(hour) function to return a sky-inspired color.
+  // Use custom getSkyColor(hour) function to return a sky-inspired color.
   // Set alpha to 30 to achieve soft trail/fade effect in animation.
   let currentHour = hour();
   let bgColor = getSkyColor(currentHour);
@@ -129,7 +129,7 @@ function drawTimeline() {
   for (let h = 0; h < 24; h++) {
     let x = timelineX + h * blockSize;
 
-    // Get sky color for this hour from our function
+    // Get sky color for this hour from function getSkyColor
     let c = getSkyColor(h);
     fill(c);
     noStroke();
@@ -160,6 +160,11 @@ function drawTimeline() {
 // This function returns a different RGB color depending on the hour of the day (0-23).
 // It simulates natural sky color changes from night to dawn, noon, sunset, and back to night.
 // Colors are manually sampled from a custom-designed 24 hour gradient palette.
+// color(r, g, b) returns a p5.Color object, which represents a color value in p5.js. By default, the parameters are interpreted as RGB values. Calling color(49, 50, 111) will return a dark color.
+// reference about color https://p5js.org/reference/p5/color/
+// wherever the function was called, so the returned value (the color values) can be used outside the function.
+// return means when this function finishes executing, it will give back a answer.
+// reference about define functions and return by Daniel Shiffman: https://www.youtube.com/watch?v=qRnUBiTJ66Y
 function getSkyColor(h) {
   if (h >= 1 && h < 5) {
     return color(49, 50, 111); // Deep night: dark blue-purple
