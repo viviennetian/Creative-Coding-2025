@@ -16,7 +16,7 @@ Basically, I want to draw cakes. Because cake is same as pizza with round shape 
 
 But I didn't fully draw my cakes as same as these, these are to fancy for the assignment. Just get a vintage cake vibe.
 
-## Progress
+## Process
 
 ### Circle to Ellipse
 
