@@ -15,25 +15,25 @@ function setup() {
 }
 
 function draw() {
-  translate(width / 2, height / 2);
-  strokeWeight(3);
+  // translate(width / 2, height / 2);
+  // strokeWeight(3);
 
-  noiseTheta = map(noise(noisePositionAngle), 0, 1, 0, 360);
-  noiseRadius = map(noise(noisePosition), 0, 1, 0, width / 2);
+  // noiseTheta = map(noise(noisePositionAngle), 0, 1, 0, 360);
+  // noiseRadius = map(noise(noisePosition), 0, 1, 0, width / 2);
 
-  let x = cos(noiseTheta) * noiseRadius;
-  let y = sin(noiseTheta) * noiseRadius;
+  // let x = cos(noiseTheta) * noiseRadius;
+  // let y = sin(noiseTheta) * noiseRadius;
 
-  //random gradient background
-  //from color to color with smooth transition
-  // background(noiseTheta, 20, noiseRadius);
+  // //random gradient background
+  // //from color to color with smooth transition
+  // // background(noiseTheta, 20, noiseRadius);
 
-  point(0, 0);
-  stroke(noiseTheta, 100, noiseRadius);
-  line(0, 0, x, y);
-  circle(x, y, 10);
-  noisePosition += noiseSpeed;
-  noisePositionAngle += noiseSpeed;
+  // point(0, 0);
+  // stroke(noiseTheta, 100, noiseRadius);
+  // line(0, 0, x, y);
+  // circle(x, y, 10);
+  // noisePosition += noiseSpeed;
+  // noisePositionAngle += noiseSpeed;
 
   // ver1.0
   // circleD = noise(noisePosition) * width; //fixed random number inside every frame
@@ -42,15 +42,13 @@ function draw() {
   // noisePosition += noiseSpeed;
 
   // ver2.0 (doesn't work???)
-  // noisePosition = 0;
-  // for (let i = 0; i < width; i++) {
-  //   let y = noise(noisePosition) * height;
-  //   noisePosition = noisePosition + noiseSpeed;
-  //   let d = map(i, 0, width, 0, 25);
-  //   circle(i, y, 5);
-  // }
+  noisePosition = startingPoint;
+  for (let i = 0; i < width; i++) {
+    let y = noise(noisePosition) * height;
+    noisePosition = noisePosition + noiseSpeed;
+    let d = map(i, 0, width, 0, 25);
+    circle(i, y, 5);
+  }
 
-  // startingPoint = startingPoint + noiseSpeed;
+  startingPoint = startingPoint + noiseSpeed;
 }
-
-function mousePressed() {}
