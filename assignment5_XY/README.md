@@ -1,61 +1,34 @@
-# template
+# Assignment 5 : flower
+
+## Projection Mapping, Week 8 Workshop
 
 ---
 
-This is a README file that can be used to describe and document your assignment.
+## Concept
 
-Markdown Cheatsheet (from [https://www.markdownguide.org/cheat-sheet/](https://www.markdownguide.org/cheat-sheet/)):
+I wanted to create a projection effect centered on one corner of a cube. So I made a simple animation resembling a daisy flower, where the XY plane serves as the top face, the XZ plane as the left face, and the YZ plane as the right face. (However, during the workshop, due to time constraints, we only managed to debug one face successfully and couldn’t assemble the full flower.)
 
 ---
 
-# Heading1
-## Heading2
-### Heading3
-#### Heading4
-##### Heading5
-###### Heading6
+## Component
 
-**bold text**
-
-*italicized text*
-
-~~strikethrough text~~
-
-Ordered List:
-1. First item
-2. Second item
-3. Third item
-
-Unordered List:
-- First item
-- Second item
-- Third item
-
-`short code block`
+### Stationary rectangle (center/base)
 
 ```
-extended code block
-fun() {
-  return 0
-}
+tianSizeCenter = map(noise(tianDOffset), 0, 1, 180, 240);
+rect(0, 400, tianSizeCenter);
 ```
 
-Link:  
-[linked text](https://www.example.com)
+This part draws the “central rectangle,” which functions as the core of the flower.
+Although it’s positioned at (0, 400), it essentially serves as a fixed visual anchor.
+Its size changes slightly according to the noise value, giving it a subtle “breathing” or rhythmic feel.
 
+### Moving rectangle without clearing the background (forming petal trails)
 
-Image with url:  
-![image description](https://dm-gy-6063-2024f-b.github.io/assets/homework/02/clark-espaco-modulado-00.jpg)
+```
+rect(tianX, tianY, tianDCurrent);
+```
 
-
-Image on repo:  
-![image description](./file-name.jpg)
-
-
-To start a new line, add two spaces at the end of a line, like this:  
-this is a new line.
-
-
-To start a new paragraph, leave an empty line between two lines of text.
-
-This is a new paragraph.
+This rectangle receives a new random target position`(tianTargetX, tianTargetY)`every second, and uses `lerp()` to move smoothly toward it.
+Because the `draw()` function doesn’t clear the background, the content from the previous frame remains visible.
+As a result, each movement leaves a visible trail on the canvas,and these overlapping traces create a visual effect similar to petals spreading outward from the flower’s center.
