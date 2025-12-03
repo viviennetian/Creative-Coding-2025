@@ -76,10 +76,8 @@ measures : beats : subdivisions
 
 For example:
 
-0:1:0 → measure 0, beat 1, subdivision index 0 (first sixteenth note)
-0:1:1 → second sixteenth note
-0:1:2 → third sixteenth note
-0:1:3 → fourth sixteenth note
+0:1:0 means measure 0, beat 1, subdivision 0 (the first sixteenth note).
+Then 0:1:1 is the second one, 0:1:2 is the third, and 0:1:3 is the fourth.
 
 In a 16-step sequencer, one step corresponds to one subdivision (usually a sixteenth note).  
 So a 16-step loop equals one 4/4 measure.
