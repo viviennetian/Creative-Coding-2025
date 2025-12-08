@@ -520,16 +520,17 @@ function drawUI() {
   fill(0, 0, 90);
   textAlign(LEFT, TOP);
   textSize(14);
-  text("Instructions:", width * 0.62, height - uiHeight + 20);
+  text("Instructions:", width * 0.62, height - uiHeight + 15);
   textSize(12);
   text(
     "1. CLICK ANYWHERE: Start Audio\n" +
-      "2. LEFT CLICK (Empty Space): Plant a new flower\n" +
-      "3. LEFT CLICK (Petals): Toggle note ON/OFF\n" +
-      "4. DRAG (Flower Center): Move Up/Down to adjust Volume\n" +
-      "5. RIGHT CLICK (Flower Center): Remove flower",
+      "2. SELECT A TYPE FROM THE PANEL\n" +
+      "3. LEFT CLICK (Empty Space): Plant a new flower\n" +
+      "4. LEFT CLICK (Petals): Toggle note ON/OFF\n" +
+      "5. DRAG (Flower Center): Move Up/Down to adjust Volume\n" +
+      "6. RIGHT CLICK (Flower Center): Remove flower",
     width * 0.7,
-    height - uiHeight + 20
+    height - uiHeight + 15
   );
   // Title Text
   fill(43, 65, 29);
