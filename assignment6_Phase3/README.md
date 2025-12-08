@@ -1,6 +1,6 @@
 # Assignment Final: Garden Sequencer
 
-## Week 14 Update
+# Week 14 Update
 
 This week I focused on organizing the UI, adding a selectable instrument panel at the bottom of the screen, and restructuring the flower system so each type has consistent behavior in visuals and sound.
 
@@ -88,7 +88,7 @@ The sequence of changes includes:
 
 ---
 
-## Week 13 Update: Interaction, Editable Steps and Flower Controls
+# Week 13 Update: Interaction, Editable Steps and Flower Controls
 
 Last week was mostly about getting Tone.js to act as a stable global clock.
 This week I finally started building actual interaction, so the sequencer feels more like a tool and less like a visual demo.
