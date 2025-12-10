@@ -1,10 +1,13 @@
-// Version 2:November 26 – December 3: (Interaction, Editable Steps and Flower Controls)
+// Version 2:November 26 – December 3:
+// - Interaction
+// - Editable Steps
+// - Flower Height adjustable and Mapping the Height to Track Volume Controls
 
 // Version 1: November 19 – November 26:(Focus on global clock with Tone.js)
 // why I picked Tone.js instead of using millis()
 // in class we used millis() as the timer
 // it's nice for small demos because you can just check how much time passed
-// and estimate the beat from that
+// and kinda estimate the beat from that
 
 // but for this project I needed timing that stays more steady and structured
 // since I have multiple flowers and each one has its own pattern and sound
@@ -22,8 +25,24 @@
 
 // =======================================
 // tone.js: https://tonejs.github.io/
+//  https://github.com/Tonejs
+// docs new version: https://tonejs.github.io/docs/15.1.22/index.html
 // docs: https://tonejs.github.io/docs/r13/
+
 // =======================================
+// how tone.js basically works (my own understanding)
+// =======================================
+// core gives you the main audio context and the global clock (Transport)(which is like a DAW timeline, the most important part in my project)
+// docs about transport: https://tonejs.github.io/docs/14.5.3/Transport
+// source is where the raw sound comes from, like an oscillator or a player
+// then instrument wraps the source with things like envelope and signal paths
+// after that the sound goes through effects or other components for shaping
+// finally everything goes into the destination which is the actual output
+
+// all the scheduling stuff is handled by tone events and the Transport timeline
+// so when I trigger a note I am not calling it "right now"
+// I'm asking the Transport to place it at a very specific audio time
+// and tone makes sure all of that stays in sync
 
 // =======================================
 // Core data structures

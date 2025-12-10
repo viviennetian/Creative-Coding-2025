@@ -7,13 +7,16 @@
 // - color mode HSB for easier color control
 //   different hues for different instruments, and brightness based on note pitch
 
-// ===== Version 2:November 26 – December 3: (Interaction, Editable Steps and Flower Controls)
+// ===== Version 2:November 26 – December 3:
+// - Interaction
+// - Editable Steps
+// - Flower Controls
 
 // ===== Version 1: November 19 – November 26:(Focus on global clock with Tone.js)
 // why I picked Tone.js instead of using millis()
 // in class we used millis() as the timer
 // it's nice for small demos because you can just check how much time passed
-// and estimate the beat from that
+// and kinda estimate the beat from that
 
 // but for this project I needed timing that stays more steady and structured
 // since I have multiple flowers and each one has its own pattern and sound
@@ -31,8 +34,24 @@
 
 // =======================================
 // tone.js: https://tonejs.github.io/
+//  https://github.com/Tonejs
+// docs new version: https://tonejs.github.io/docs/15.1.22/index.html
 // docs: https://tonejs.github.io/docs/r13/
+
 // =======================================
+// how tone.js basically works (my own understanding)
+// =======================================
+// core gives you the main audio context and the global clock (Transport)(which is like a DAW timeline, the most important part in my project)
+// docs about transport: https://tonejs.github.io/docs/14.5.3/Transport
+// source is where the raw sound comes from, like an oscillator or a player
+// then instrument wraps the source with things like envelope and signal paths
+// after that the sound goes through effects or other components for shaping
+// finally everything goes into the destination which is the actual output
+
+// all the scheduling stuff is handled by tone events and the Transport timeline
+// so when I trigger a note I am not calling it "right now"
+// I'm asking the Transport to place it at a very specific audio time
+// and tone makes sure all of that stays in sync
 
 // =======================================
 // Core data structures
@@ -114,7 +133,9 @@ function draw() {
 
   pop(); // Restore original settings
 
-  // Draw all flowers on screen
+  // =======================================
+  // ===== Draw all flowers on screen =====
+  // =======================================
   for (let flower of flowers) {
     flower.display();
   }
@@ -146,14 +167,16 @@ async function mousePressed() {
   if (Tone.context.state !== "running") {
     await Tone.start(); // Wait for AudioContext to start
   }
-  // [new] 检查是否点击了底部的 UI 区域
+  // [new] check if clicked on the UI area
   if (mouseY > height - uiHeight) {
-    // 既然点在底部区域，我们要看看点到了哪个按钮
-    // 循环检查每一个按钮的位置
+    // if clicked in the UI panel area, check which button
+    // loop to check each button
     for (let btn of uiButtons) {
-      // 计算按钮的边界
+      // check if this button was hit
       for (let i = 0; i < uiButtons.length; i++) {
         let btn = uiButtons[i];
+        // if hit, change currentFlowerType
+        //.isHit is a helper function inside the UIButton class, it checks if the mouse is close enough to the button position
         if (btn.isHit(mouseX, mouseY)) {
           currentFlowerType = btn.type;
           return;
@@ -163,7 +186,7 @@ async function mousePressed() {
     return; // if clicked UI, return, don't plant any flower.
   }
 
-  // If sequencer hasn't started yet → start it
+  // If sequencer hasn't started yet, start it
   if (!isPlaying) {
     startSequencer();
     isPlaying = true;
@@ -232,17 +255,32 @@ function mouseReleased() {
 // =======================================
 // ===== Sequencer Core =====
 // =======================================
+// To build a sequencer, I need something that triggers the callback on every 1/16 note.
+// Each trigger tells all the flowers what the current step is and then advances the sequencer by one step.
 function startSequencer() {
+  //scheduleRepeat() is one of the method in:  https://tonejs.github.io/docs/14.5.3/Transport
+  // Schedule a repeated event along the timeline. The event will fire at the interval starting at the startTime and for the specified duration.
+  // (time) => {...}:
+  // when the next step hits, run this block
   Tone.Transport.scheduleRepeat((time) => {
     // Tell every flower what the current step index is
+    // and pass the exact Tone.js timing so their sounds line up
     for (let i = 0; i < flowers.length; i++) {
       flowers[i].playStep(time, currentStep);
     }
 
-    // Move the pointer forward 0 -> 15 -> 0
+    // Move the pointer forward by 1 step, but keep looping 0-15
+    // Using modulo (%) makes it wrap automatically.
+    //
+    // For example:
+    // If totalSteps = 16 and currentStep becomes 16,
+    // then 16 % 16 = 0, it jumps back to the beginning.
+    //
+    // So the sequencer will forever cycle through 0 .. 15 .. 0 .. 15...
     currentStep = (currentStep + 1) % totalSteps;
-  }, "16n");
+  }, "16n"); // "16n" = one sixteenth note per step
 
+  //after scheduling all the events, start the transport to kick things off
   Tone.Transport.start();
 }
 
@@ -275,41 +313,42 @@ class Flower {
     // Random pattern
     this.pattern = [];
     for (let i = 0; i < totalSteps; i++) {
+      // Roll the dice: 70% chance to be 0 (mute), 30% chance to be 1 (play).
       this.pattern.push(random() > 0.7 ? 1 : 0);
     }
 
     this.pulse = 0; // Animation value
 
-    // 3. Sound setup
+    // Sound setup
     // [new] Create the Tone.js Synth based on type
     if (this.type === "BLOOM") {
-      // [柔和] 三角波 (Triangle)
+      // Triangle Wave Synth
       this.synth = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "triangle" },
         envelope: { attack: 0.02, decay: 0.1, sustain: 0.1, release: 1 },
       }).toDestination();
     } else if (this.type === "THORN") {
-      // [尖锐] 锯齿波 (Sawtooth) 或者 FM合成器
-      // FMSynth 听起来更有电子感
+      // FMSynth
       this.synth = new Tone.PolySynth(Tone.FMSynth, {
         harmonicity: 3,
         modulationIndex: 10,
         envelope: { attack: 0.01, decay: 0.2 },
       }).toDestination();
     } else if (this.type === "GLYPH") {
-      // [金属/打击] AMSynth 或 MetalSynth
+      //AMSynth
       this.synth = new Tone.PolySynth(Tone.AMSynth, {
         harmonicity: 2,
         envelope: { attack: 0.001, decay: 0.1, sustain: 0, release: 0.1 }, // 短促的声音
       }).toDestination();
     } else if (this.type === "SHARP") {
+      // Square Wave Synth
       this.synth = new Tone.PolySynth(Tone.Synth, {
         oscillator: { type: "square" },
         envelope: { attack: 0.01, decay: 0.2, sustain: 0.2, release: 0.8 },
       }).toDestination();
     }
 
-    // 4. Volume control
+    // Volume control
     this.isDragging = false;
     this.updateVolume();
   }
@@ -345,8 +384,12 @@ class Flower {
     return "NONE";
   }
 
+  // ===== play sound at this step =====
   playStep(time, stepIndex) {
     if (this.pattern[stepIndex] === 1) {
+      // Trigger the note for one 16th note at the scheduled time
+      // https://tonejs.github.io/docs/14.5.3/Synth#triggerAttackRelease
+      //triggerAttackRelease(note, duration, time, velocity), Trigger the attack and then the release after the duration.
       this.synth.triggerAttackRelease(this.note, "16n", time);
       this.pulse = 10; // Trigger animation
     }
@@ -354,7 +397,7 @@ class Flower {
 
   // =====  interactively update height and volume =====
   dragHeight(my) {
-    // 1. Calculate new height: Root Y (ground) - Mouse Y (current)
+    // 1. Calculate new height: Root Y (ground), Mouse Y (current)
     // Since screen Y coordinates get smaller as you go up, we subtract.
     let newHeight = this.rootY - my;
 
@@ -391,8 +434,9 @@ class Flower {
     this.synth.volume.rampTo(vol, 0.1);
   }
 
+  // ===== Draw whatever Display on the Screen =====
   display() {
-    // [new] Wind sway effect for more organic motion
+    // Wind sway effect for more organic motion
     let windOffset = map(
       noise(frameCount / 100, this.rootX / 200),
       0,

@@ -27,7 +27,7 @@
 // how tone.js basically works (my own understanding)
 // =======================================
 // core gives you the main audio context and the global clock (Transport)(which is like a DAW timeline, the most important part in my project)
-// docs about transport: https://tonejs.github.io/docs/r13/Transport
+// docs about transport: https://tonejs.github.io/docs/14.5.3/Transport
 // source is where the raw sound comes from, like an oscillator or a player
 // then instrument wraps the source with things like envelope and signal paths
 // after that the sound goes through effects or other components for shaping
