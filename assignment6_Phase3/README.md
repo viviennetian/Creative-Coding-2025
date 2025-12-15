@@ -6,6 +6,10 @@ This week I focused on organizing the UI, adding a selectable instrument panel a
 
 ---
 
+### Final Flowchart
+
+![Flowchart](./flowchart.png)
+
 ### UI Redesign
 
 Designed new interface layout and flower in Illustrator:
