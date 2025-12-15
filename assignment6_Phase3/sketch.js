@@ -579,7 +579,7 @@ function drawUI() {
   // Title Text
   fill(43, 65, 29);
   textSize(20);
-  text("Garden Sequencer V3", 30, 20);
+  text("Garden Sequencer", 30, 20);
 }
 
 // =======================================

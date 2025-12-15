@@ -88,6 +88,16 @@ The sequence of changes includes:
 
 ---
 
+### Inspiration
+
+- Flowers Bloom in an Infinite Universe inside a Teacup, team lab, 2016
+  [Flowers Bloom in an Infinite Universe inside a Teacup](https://www.teamlab.art/zh-hans/ew/enteahouse-genkatei/)
+
+Visual Inspiration:
+
+- HIMAWARI, TM inc.
+  [himawari-sadow](https://tm-inc.jp/works/himawari-sadow/)
+
 # Week 13 Update: Interaction, Editable Steps and Flower Controls
 
 Last week was mostly about getting Tone.js to act as a stable global clock.
